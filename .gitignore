@@ -1,0 +1,28 @@
+# Power Platform / pac CLI
+solutions/**/bin/
+solutions/**/obj/
+solutions/**/temp/
+solutions/**/tmp/
+solutions/**/Temp/
+solutions/**/logs/
+solutions/**/_temp/
+
+# Unpack staging
+**/.solution/
+**/.pac/
+**/.msdyn/
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Editor junk
+*.swp
+*.swo
+*.tmp
+*.bak
+*.orig

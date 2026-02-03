@@ -1,7 +1,4 @@
-Repository for policy acknowledgement solution Power Platform
+LEGACY README
 
-Objective
-
-Processes
-
-Changelog
+This file is retained for historical reference.
+Please refer to README.md for current project documentation.
