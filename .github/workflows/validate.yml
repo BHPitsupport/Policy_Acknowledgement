@@ -1,0 +1,40 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check repo structure
+        run: |
+          test -f README.md
+          test -d scripts
+          test -d config
+          test -d solutions
+
+      - name: Check for obvious secrets
+        run: |
+          set -euo pipefail
+          patterns='(password\s*[:=]|client_secret|secret\s*[:=]|api[_-]?key|-----BEGIN|PRIVATE KEY|AWS_SECRET_ACCESS_KEY)'
+          if rg -n --hidden --no-ignore-vcs -S -g '!**/.git/**' -g '!**/artifacts/**' -g '!**/config/env.local.*' "$patterns" .; then
+            echo "Potential secret pattern found. Please remove or sanitize."
+            exit 1
+          fi
+
+      - name: Ensure unpacked solution when present
+        run: |
+          set -euo pipefail
+          if [ -d solutions ]; then
+            shopt -s nullglob
+            dirs=(solutions/*/)
+            if [ ${#dirs[@]} -gt 0 ]; then
+              for d in "${dirs[@]}"; do
+                test -f "${d}solution.xml"
+              done
+            fi
+          fi

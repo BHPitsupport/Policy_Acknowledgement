@@ -26,3 +26,7 @@ $RECYCLE.BIN/
 *.tmp
 *.bak
 *.orig
+
+# Local environment config
+config/env.local.ps1
+config/env.local.sh
